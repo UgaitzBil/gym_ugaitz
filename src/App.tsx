@@ -10,6 +10,7 @@ import {
   Target,
 } from 'lucide-react'
 import { supabase } from './lib/supabase'
+import { TrainScreen } from './components/TrainScreen'
 
 type Tab = 'train' | 'calendar' | 'bilbo'
 
@@ -181,7 +182,7 @@ function AppShell({ user }: { user: User }) {
       <main className="px-4 pb-28 pt-5">
         <div className="mx-auto max-w-lg">
           {activeTab === 'train' && (
-            <EmptyScreen icon={Dumbbell} title="Tu sesión activa" text="Aquí podremos iniciar y registrar tus entrenamientos." />
+            <TrainScreen userId={user.id} />
           )}
           {activeTab === 'calendar' && (
             <EmptyScreen icon={CalendarDays} title="Histórico" text="Aquí aparecerá el calendario de entrenamientos." />
