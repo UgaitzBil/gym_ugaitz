@@ -12,6 +12,7 @@ import {
 import { supabase } from './lib/supabase'
 import { TrainScreen } from './components/TrainScreen'
 import { CalendarScreen } from './components/CalendarScreen'
+import { BilboScreen } from './components/BilboScreen'
 
 type Tab = 'train' | 'calendar' | 'bilbo'
 
@@ -189,7 +190,7 @@ function AppShell({ user }: { user: User }) {
             <CalendarScreen userId={user.id} />
           )}
           {activeTab === 'bilbo' && (
-            <EmptyScreen icon={Target} title="Ciclos Bilbo" text="Aquí gestionaremos ciclos y progresiones." />
+            <BilboScreen userId={user.id} />
           )}
         </div>
       </main>
@@ -220,26 +221,6 @@ function AppShell({ user }: { user: User }) {
         </div>
       </nav>
     </div>
-  )
-}
-
-function EmptyScreen({
-  icon: Icon,
-  title,
-  text,
-}: {
-  icon: typeof Dumbbell
-  title: string
-  text: string
-}) {
-  return (
-    <section className="mt-16 text-center">
-      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-zinc-500">
-        <Icon size={26} />
-      </div>
-      <h2 className="text-xl font-black">{title}</h2>
-      <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-zinc-500">{text}</p>
-    </section>
   )
 }
 

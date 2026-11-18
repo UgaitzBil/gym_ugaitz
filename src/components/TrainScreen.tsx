@@ -296,6 +296,17 @@ export function TrainScreen({ userId }: { userId: string }) {
     setError('')
     setSuccess('')
     setIsSavingSet(true)
+    let activeBilboCycleId: string | null = null
+    if (isBilboSet) {
+      const { data: activeCycle } = await supabase
+        .from('bilbo_cycles')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('exercise_id', selectedExercise.id)
+        .eq('is_active', true)
+        .maybeSingle()
+      activeBilboCycleId = activeCycle?.id ?? null
+    }
     const setOrder =
       session.sets.filter((set) => set.exerciseId === selectedExercise.id).length + 1
     const draftSet: ActiveSet = {
@@ -316,7 +327,7 @@ export function TrainScreen({ userId }: { userId: string }) {
         user_id: userId,
         workout_id: session.workoutId,
         exercise_id: selectedExercise.id,
-        bilbo_cycle_id: null,
+        bilbo_cycle_id: activeBilboCycleId,
         set_order: setOrder,
         weight_kg: parsedWeight,
         reps: parsedReps,
