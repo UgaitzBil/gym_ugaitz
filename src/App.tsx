@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { supabase } from './lib/supabase'
 import { TrainScreen } from './components/TrainScreen'
+import { CalendarScreen } from './components/CalendarScreen'
 
 type Tab = 'train' | 'calendar' | 'bilbo'
 
@@ -185,7 +186,7 @@ function AppShell({ user }: { user: User }) {
             <TrainScreen userId={user.id} />
           )}
           {activeTab === 'calendar' && (
-            <EmptyScreen icon={CalendarDays} title="Histórico" text="Aquí aparecerá el calendario de entrenamientos." />
+            <CalendarScreen userId={user.id} />
           )}
           {activeTab === 'bilbo' && (
             <EmptyScreen icon={Target} title="Ciclos Bilbo" text="Aquí gestionaremos ciclos y progresiones." />
